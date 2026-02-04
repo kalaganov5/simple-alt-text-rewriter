@@ -1,0 +1,48 @@
+name: Build and Release Plugin
+
+on:
+    push:
+        tags:
+            - "v*"
+
+permissions:
+    contents: write
+
+jobs:
+    build-and-release:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Install Dependencies and Build
+              working-directory: ./simple-alt-text-rewriter
+              run: |
+                  npm ci
+                  npm run build
+
+            - name: Prepare Plugin Artifact
+              run: |
+                  mkdir -p dist/simple-alt-text-rewriter
+
+                  # Sync files excluding dev files listed in .distignore
+                  # Note: We use rsync to copy from the subfolder to the dist folder
+                  rsync -rc --exclude-from='./simple-alt-text-rewriter/.distignore' ./simple-alt-text-rewriter/ dist/simple-alt-text-rewriter/
+
+            - name: Zip Plugin
+              run: |
+                  cd dist
+                  zip -r ../simple-alt-text-rewriter.zip simple-alt-text-rewriter
+
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  files: simple-alt-text-rewriter.zip
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
