@@ -4,6 +4,15 @@
 
 Unlike other plugins that only "look" at the image, this plugin **reads the surrounding text (context)** to understand the image's role in your article. This ensures your Alt Text is not just descriptive, but also highly relevant for SEO and Accessibility.
 
+![How it works](example.gif)
+
+## How It Works
+
+1.  **Context Extraction**: When you click "Generate", the plugin scans the content surrounding the image (paragraphs, headings) in your post.
+2.  **Vision Analysis**: It sends both the image data and the extracted context to Google Gemini AI.
+3.  **Semantic Generation**: The AI analyzes the visual content *in relation* to your text. It doesn't just say "A cat sitting", but might say "A cat sitting on a laptop, illustrating the concept of remote work distractions", depending on your article's topic.
+4.  **Integration**: The generated text is automatically inserted into the Alt Text or Caption field.
+
 ## Features
 
 *   **Context-Aware**: Analyzes the text surrounding the image (Gutenberg blocks or Classic content) to insert relevant keywords naturally.
