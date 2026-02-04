@@ -32,18 +32,20 @@ class SATR_Api_Client
         if ($type === 'description') {
             $prompt_template = get_option('satr_description_prompt');
             if (empty($prompt_template)) {
-                $prompt_template = "You are a content writer. Generate a detailed and engaging description in Russian for the provided image.\nContext details:\n- Article Title: {post_title}\n- Surrounding Text: {image_context}\n\nThe description should provide more detail than alt text, setting the scene or explaining the visual content in relation to the article. Return ONLY the description.";
+                $prompt_template = "You are a content writer. Generate a detailed and engaging description in the website's language ({language}) for the provided image.\nContext details:\n- Article Title: {post_title}\n- Surrounding Text: {image_context}\n\nThe description should provide more detail than alt text, setting the scene or explaining the visual content in relation to the article. Return ONLY the description.";
             }
         } else {
             $prompt_template = get_option('satr_custom_prompt');
             if (empty($prompt_template)) {
-                $prompt_template = "You are a W3C Web Accessibility and SEO expert. Generate high-quality alt text in Russian for the provided image.\n\nContext:\n- Title: {post_title}\n- Text: {image_context}\n- Old Alt: {current_alt}\n\nStrict Rules:\n1. NO Filler Phrases: NEVER start with \"Image of\", \"Picture of\", \"Show\", \"На изображении\", \"Фото\", \"Картинка\", \"Здесь мы видим\". Start directly with the subject.\n2. Accessibility First: If the image contains text, transcribe it. If it conveys information, describe the meaning, not just the visuals.\n3. SEO: Integrate relevant keywords from the context naturally, but do not stuff.\n4. Length: Concise (max 125 chars).\n5. Context: Ensure the alt fills the gap in the surrounding text.\n\nReturn ONLY the alt text.";
+                $prompt_template = "You are a W3C Web Accessibility and SEO expert. Generate high-quality alt text in the website's language ({language}) for the provided image.\n\nContext:\n- Title: {post_title}\n- Text: {image_context}\n- Old Alt: {current_alt}\n\nStrict Rules:\n1. NO Filler Phrases: NEVER start with \"Image of\", \"Picture of\", \"Show\", \"На изображении\", \"Фото\", \"Картинка\", \"Здесь мы видим\". Start directly with the subject.\n2. Accessibility First: If the image contains text, transcribe it. If it conveys information, describe the meaning, not just the visuals.\n3. SEO: Integrate relevant keywords from the context naturally, but do not stuff.\n4. Length: Concise (max 125 chars).\n5. Context: Ensure the alt fills the gap in the surrounding text.\n\nReturn ONLY the alt text.";
             }
         }
 
+        $language = get_bloginfo('language'); // e.g., 'en-US', 'ru-RU'
+
         $prompt_text = str_replace(
-            array('{post_title}', '{image_context}', '{current_alt}'),
-            array($post_title, $image_context, $current_text),
+            array('{post_title}', '{image_context}', '{current_alt}', '{language}'),
+            array($post_title, $image_context, $current_text, $language),
             $prompt_template
         );
 

@@ -117,7 +117,7 @@ class SATR_Admin_UI
     public function prompt_field_html()
     {
         $prompt = get_option('satr_custom_prompt');
-        $default_prompt = "You are a W3C Web Accessibility and SEO expert. Generate high-quality alt text in Russian for the provided image.\n\nContext:\n- Title: {post_title}\n- Text: {image_context}\n- Old Alt: {current_alt}\n\nStrict Rules:\n1. NO Filler Phrases: NEVER start with \"Image of\", \"Picture of\", \"Show\", \"На изображении\", \"Фото\", \"Картинка\", \"Здесь мы видим\". Start directly with the subject.\n2. Accessibility First: If the image contains text, transcribe it. If it conveys information, describe the meaning, not just the visuals.\n3. SEO: Integrate relevant keywords from the context naturally, but do not stuff.\n4. Length: Concise (max 125 chars).\n5. Context: Ensure the alt fills the gap in the surrounding text.\n\nReturn ONLY the alt text.";
+        $default_prompt = "You are a W3C Web Accessibility and SEO expert. Generate high-quality alt text in the website's language ({language}) for the provided image.\n\nContext:\n- Title: {post_title}\n- Text: {image_context}\n- Old Alt: {current_alt}\n\nStrict Rules:\n1. NO Filler Phrases: NEVER start with \"Image of\", \"Picture of\", \"Show\", \"На изображении\", \"Фото\", \"Картинка\", \"Здесь мы видим\". Start directly with the subject.\n2. Accessibility First: If the image contains text, transcribe it. If it conveys information, describe the meaning, not just the visuals.\n3. SEO: Integrate relevant keywords from the context naturally, but do not stuff.\n4. Length: Concise (max 125 chars).\n5. Context: Ensure the alt fills the gap in the surrounding text.\n\nReturn ONLY the alt text.";
 
         if (empty($prompt)) {
             $prompt = $default_prompt;
@@ -126,7 +126,7 @@ class SATR_Admin_UI
         <textarea name="satr_custom_prompt" rows="5" cols="50" class="large-text code"><?php echo esc_textarea($prompt); ?></textarea>
         <p class="description">
             Instructions for <strong>Alt Text</strong>.<br>
-            <strong>Variables:</strong> <code>{post_title}</code>, <code>{image_context}</code>, <code>{current_alt}</code>.
+            <strong>Variables:</strong> <code>{post_title}</code>, <code>{image_context}</code>, <code>{current_alt}</code>, <code>{language}</code>.
         </p>
     <?php
     }
@@ -134,7 +134,7 @@ class SATR_Admin_UI
     public function description_prompt_field_html()
     {
         $prompt = get_option('satr_description_prompt');
-        $default_prompt = "You are a professional copywriter. Generate an engaging caption in Russian for the provided image.\n\nContext:\n- Title: {post_title}\n- Text: {image_context}\n\nRules:\n1. Non-obvious: Do NOT describe what is already clearly visible. Focus on location, context, date, or event.\n2. Length: 2-3 short, punchy sentences.\n3. Keywords: Use LSI (Latent Semantic Indexing) phrases naturally.\n4. Value: Explain WHY this image matters here.\n\nReturn ONLY the caption text.";
+        $default_prompt = "You are a professional copywriter. Generate an engaging caption in the website's language ({language}) for the provided image.\n\nContext:\n- Title: {post_title}\n- Text: {image_context}\n\nRules:\n1. Non-obvious: Do NOT describe what is already clearly visible. Focus on location, context, date, or event.\n2. Length: 2-3 short, punchy sentences.\n3. Keywords: Use LSI (Latent Semantic Indexing) phrases naturally.\n4. Value: Explain WHY this image matters here.\n\nReturn ONLY the caption text.";
 
         if (empty($prompt)) {
             $prompt = $default_prompt;
@@ -143,7 +143,7 @@ class SATR_Admin_UI
         <textarea name="satr_description_prompt" rows="5" cols="50" class="large-text code"><?php echo esc_textarea($prompt); ?></textarea>
         <p class="description">
             Instructions for <strong>Image Description</strong>.<br>
-            <strong>Variables:</strong> <code>{post_title}</code>, <code>{image_context}</code>.
+            <strong>Variables:</strong> <code>{post_title}</code>, <code>{image_context}</code>, <code>{language}</code>.
         </p>
     <?php
     }

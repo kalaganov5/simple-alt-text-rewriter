@@ -3,8 +3,10 @@
 /**
  * Plugin Name: Simple Alt Text Rewriter
  * Description: Generates SEO-optimized alt text using article context.
- * Version: 1.0.2
+ * Version: 1.0.4
  * Author: Vladimir Kalaganov
+ * Author URI: https://kalaganov5.com/
+ * Plugin URI: https://github.com/kalaganov5/simple-alt-text-rewriter
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: simple-alt-text-rewriter
