@@ -40,6 +40,11 @@ class SATR_Admin_UI
             'sanitize_callback' => 'sanitize_text_field',
             'default' => ''
         ));
+        register_setting('satr_settings_group', 'satr_api_base_url', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => 'https://generativelanguage.googleapis.com'
+        ));
         register_setting('satr_settings_group', 'satr_custom_prompt', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_textarea_field',
@@ -67,6 +72,14 @@ class SATR_Admin_UI
         );
 
         add_settings_field(
+            'satr_api_base_url',
+            'API Base URL',
+            array($this, 'api_base_url_field_html'),
+            'simple-alt-text-rewriter',
+            'satr_general_section'
+        );
+
+        add_settings_field(
             'satr_custom_prompt',
             'Alt Text Prompt',
             array($this, 'prompt_field_html'),
@@ -89,6 +102,15 @@ class SATR_Admin_UI
 ?>
         <input type="password" name="satr_gemini_api_key" value="<?php echo esc_attr($api_key); ?>" class="regular-text">
         <p class="description">Enter your Google Gemini API Key here.</p>
+    <?php
+    }
+
+    public function api_base_url_field_html()
+    {
+        $base_url = get_option('satr_api_base_url', 'https://generativelanguage.googleapis.com');
+    ?>
+        <input type="text" name="satr_api_base_url" value="<?php echo esc_attr($base_url); ?>" class="regular-text">
+        <p class="description">Default: <code>https://generativelanguage.googleapis.com</code>. Change if you need to use a proxy (e.g. for restricted regions).</p>
     <?php
     }
 

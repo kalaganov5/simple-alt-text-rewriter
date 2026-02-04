@@ -23,7 +23,11 @@ class SATR_Api_Client
         // Using 'gemini-2.5-flash' based on 2026 documentation.
         $model = 'gemini-2.5-flash';
 
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key=" . $this->api_key;
+        $base_url = get_option('satr_api_base_url', 'https://generativelanguage.googleapis.com');
+        // Ensure no trailing slash
+        $base_url = untrailingslashit($base_url);
+
+        $url = "{$base_url}/v1beta/models/{$model}:generateContent?key=" . $this->api_key;
 
         if ($type === 'description') {
             $prompt_template = get_option('satr_description_prompt');
