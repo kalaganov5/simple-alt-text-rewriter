@@ -28,7 +28,11 @@ This plugin uses Google Gemini AI to analyze your content and images to generate
 
 = Can I customize the AI prompts? =
 
-Yes. Go to **Settings** -> **Alt Text Rewriter**. You can modify the system prompts used for Alt Text or Descriptions to fit your tone of voice or SEO strategy.
+Yes. Go to **Settings** -> **Alt Text Rewriter**. You can modify the system prompts used for Alt Text or Descriptions.
+Available variables:
+* `{post_title}` - Title of the post/page.
+* `{image_context}` - Text surrounding the image.
+* `{current_alt}` - Current alt text (for rewriting).
 
 = I get "User location is not supported" or "400 Bad Request" error? =
 
