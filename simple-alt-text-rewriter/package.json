@@ -1,7 +1,7 @@
 {
-    "name": "simple-cf7-feedback",
-    "version": "1.0.0",
-    "description": "Simple CF7 Feedback Plugin Assets",
+    "name": "simple-alt-text-rewriter",
+    "version": "1.0.1",
+    "description": "Simple Alt Text Rewriter Plugin Assets",
     "main": "index.js",
     "scripts": {
         "build": "webpack --mode production",
