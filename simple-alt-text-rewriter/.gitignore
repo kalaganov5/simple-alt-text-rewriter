@@ -1,0 +1,29 @@
+# Operating System Checksum Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Node.js
+node_modules/
+*/node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json # Optional: keep if you want to lock versions, ignore if you want to update freely. Usually kept. I'll keep it commented out to NOT ignore it by default, or just not list it.
+
+# Build output
+plugins/simple-cf7-feedback/assets/
+
+# Copilot / AI
+.github/copilot-instructions.md
+# (User might want to keep instructions, but sometimes generated stuff is ignored. I will keep it.)
+
+# Build output (compiled assets)
+plugins/simple-cf7-feedback/assets/

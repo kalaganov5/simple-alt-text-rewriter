@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: saltr_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_password
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:latest
+    container_name: saltr_wordpress
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_password
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1 # Включает режим отладки
+    volumes:
+      - ./simple-alt-text-rewriter:/var/www/html/wp-content/plugins/simple-alt-text-rewriter
+    depends_on:
+      - db
+
+volumes:
+  db_data:
