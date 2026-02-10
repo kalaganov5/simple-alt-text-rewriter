@@ -29,3 +29,4 @@ plugins/simple-cf7-feedback/assets/
 # Build output (compiled assets)
 simple-alt-text-rewriter/assets/
 example/
+package-lock.json
